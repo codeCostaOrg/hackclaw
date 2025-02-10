@@ -13,16 +13,17 @@ func SendSpawns(discord *discordgo.Session, interaction *discordgo.InteractionCr
 
 	options := interaction.ApplicationCommandData().Options
 	selectedMap := options[0].Value.(string)
-	var mapEmbed *discordgo.MessageEmbed
+	var mapURL string
 
 	switch selectedMap {
 	case string(models.ZERO_DAM):
-		mapEmbed = &discordgo.MessageEmbed{
-			Title: selectedMap + " Spawns",
-			Image: &discordgo.MessageEmbedImage{
-				URL: "https://i.imgur.com/hN7W003.jpeg",
-			},
-		}
+		mapURL = "https://i.imgur.com/rZ6XPzk.jpeg"
+	case string(models.LAYALI_GROVE):
+		mapURL = "https://i.imgur.com/Ew95QDg.jpeg"
+	case string(models.BRAKKESH):
+		mapURL = "https://i.imgur.com/7bYkyki.png"
+	case string(models.SPACE_CITY):
+		mapURL = "https://i.imgur.com/Qm3cHCu.png"
 	default:
 		errMessage := fmt.Sprintf("Sorry %s is not supported", selectedMap)
 		utils.LogDiscordError("SendSpawns.selectedMap.default", errMessage)
@@ -35,8 +36,14 @@ func SendSpawns(discord *discordgo.Session, interaction *discordgo.InteractionCr
 	}
 
 	// embed map
-	embeds := []*discordgo.MessageEmbed{}
-	embeds = append(embeds, mapEmbed)
+	embeds := []*discordgo.MessageEmbed{
+		{
+			Title: selectedMap + " Spawns",
+			Image: &discordgo.MessageEmbedImage{
+				URL: mapURL,
+			},
+		},
+	}
 
 	err := discord.InteractionRespond(interaction.Interaction, &discordgo.InteractionResponse{
 		Type: discordgo.InteractionResponseChannelMessageWithSource,

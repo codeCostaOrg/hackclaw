@@ -20,6 +20,18 @@ var CommandList = []*discordgo.ApplicationCommand{
 						Name:  string(models.ZERO_DAM),
 						Value: models.ZERO_DAM,
 					},
+					{
+						Name:  string(models.LAYALI_GROVE),
+						Value: models.LAYALI_GROVE,
+					},
+					{
+						Name:  string(models.BRAKKESH),
+						Value: models.BRAKKESH,
+					},
+					{
+						Name:  string(models.SPACE_CITY),
+						Value: models.SPACE_CITY,
+					},
 				},
 				Required: true,
 			},

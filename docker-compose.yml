@@ -1,0 +1,13 @@
+---
+# FIXME: this only runs the bot
+# eventually we want to have this in the api service
+
+services:
+  bot:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./app:/app/app
+      - ./cmd:/app/cmd
+    command: air cmd/start.go
